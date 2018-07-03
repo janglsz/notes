@@ -1,5 +1,5 @@
 // GIT COMMANDS
-----------------
+-----------------------------------------------------------------------------------------------------------------------------
 
 git --version		// Tells you the version of Git
 
@@ -208,10 +208,10 @@ git ls-tree HEAD			// List the files & their SHA-1 values, in the commit referen
 git ls-tree master			// List the files & their SHA-1 values, in the commit referenced by master
 git ls-tree master assets/  // List the files & their SHA-1 values, in the master commit, assets folder 
 git ls-tree <SHA-1 value>	// List the files & their SHA-1 values, in the commit or commit sub-folder, 							// referenced by the <SHA-1> value
+-------------------------------------------------
 
-
-
-
+git show <SHA-1 hash>				// Shows the full commit, author, date, the commit message and a git diff
+git show --format=oneline HEAD		// Show the full commit, author, date, the commit message and a git diff from HEAD
 
 
 
