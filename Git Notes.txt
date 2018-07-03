@@ -88,14 +88,39 @@ git log --graph			// Shows a graph of commits including branches, including bran
 
 git log --oneline --graph --all --decorate		// USEFUL COMPACT git log COMMAND
 
+
+
+-------------------------------------------------
+git diff
+-------------------------------------------------
+git diff					// Shows the file changes between the files in the working directory and the repository.
+
+git diff --staged			// Shows the file changes between the files in the staging directory and
+							// the repository. Prior to Git version 1.7, 'git diff -cached' was used
+							
+git diff --color-words contact.html		// Shows only the changes to text in the element, instead
+										// of showing all text in the element before and after
+						
+git diff <SHA-1 tree-ish>	// Returns all changes to the tree-ish (i.e. folder or file) at the point in time represented
+	 						// by <SHA-1> up to the current point in time.
+							
+git diff <SHA-1 tree-ish> index.html	// Returns all changes to the tree-ish (i.e. folder or file) at the point in time
+										// represented by <SHA-1> up to the current point in time, only for index.html
+										
+git diff 22462e..87ac22b index.html		// Show all changes to index.html, made after the commit represented by SHA-1 hash 
+										// 22462e, up to the commit represented by SHA-1 hash 87ac22b
+										
+git diff --stat --summary 22462e..HEAD			// USEFUL COMPACT git diff format
+
+git diff --ignore-space-changed 22462e..HEAD	// Ignores changes to whitespace
+git diff -b 22462e..HEAD						// Same as the above command
+
+git diff --ignore-all-space 22462e..HEAD		// Ignores ALL whitespace
+git diff -w 22462e..HEAD						// Same as the above command
+									
 -------------------------------------------------
 -------------------------------------------------
-
-
-git diff				// Shows the file changes between the files in the working directory and  						// the repository.
-
-git diff --staged		// Shows the file changes between the files in the staging directory and
-						// the repository. Prior to Git version 1.7, 'git diff -cached' was used
+										
 						
 git rm file_to_delete2.txt		// Immediately deletes the file: file_to_delete2.txt (Does not 								// place in the Trash)
 
@@ -105,8 +130,7 @@ git mv second_file.txt secondary_file.txt	// A mv (move) in Git is the same as a
 						
 [-] + [Shift] + [s]		// Wraps/unwraps text in terminal	
 
-git diff --color-words contact.html		// Shows only the changes to text in the element, instead
-										// of showing all text in the element before and after
+
 
 git commit -am "Commit Message"		// Add to the staging index and commit it to the repository, 
 									// in one action. Note: Files that are not tracked or are being
@@ -211,7 +235,11 @@ git ls-tree <SHA-1 value>	// List the files & their SHA-1 values, in the commit 
 -------------------------------------------------
 
 git show <SHA-1 hash>				// Shows the full commit, author, date, the commit message and a git diff
-git show --format=oneline HEAD		// Show the full commit, author, date, the commit message and a git diff from HEAD
+									// The <SHA-1> value can also be a tree-ish that represents a folder or file
+
+git show --format=oneline HEAD		// Show the full commit, author, date, the commit message and a git diff at the HEAD
+git show --format=oneline HEAD^		// Show the full commit, author, date, the commit message and a git diff at the 
+									// parent of HEAD
 
 
 
