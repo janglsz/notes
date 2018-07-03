@@ -1,0 +1,262 @@
+// GIT COMMANDS
+----------------
+
+git --version		// Tells you the version of Git
+
+git config --global user.name "Kevin Jang"				// Add your name to the configuration file
+git config --global user.email "kevin.a.jang@gmail.com"		// Add your email address to the 															// configuration file	
+git config --list								// View the full Git configuration file
+
+cd ~								// Go to the users root folder 
+cat .gitconfig						// View the Git configuration file settings
+									// .gitconfig is located at the users root folder
+
+git help							// View Git Help
+git help log 						// For Git, view the help information for the log
+man git-log							// Unix equivalent - View the manual for the Git log
+
+git init							// Initialise a Git repository at the current working directory
+
+ls -la .git							// View files in the .git directory	
+
+git add . 							// Add every change thats been made to the current working 
+									// directory
+
+git commit -m "Initial Commit"		// Commit the changes to the repository with the commit 
+									// message: "Initial Commit"
+
+
+// COMMIT MESSAGE BEST PRACTICES
+* Short sinfle line summary < 50 characters
+* Optionally followed by a blank link and more complete description
+* For more complete descriptions, keep each line to less than 72 characters
+* Write commit messages in the present tense, not past tense
+* Bullet points are usually asterisks or hyphens
+* Add "ticket tracking numbers" from bugs or support requests
+* Can develop shorthand standards for your organization
+	E.g.  	
+			- "[css,js]"	// CSS and Javascript change 
+	     	
+			- "bugfix: "	// bugfix
+			
+			- "#38473 - "	// JIRA defect/task
+			
+			- t239403 - Fixes bug in admin login
+			
+			Removes case sensitivity from the admin username
+			input field.
+			
+
+-------------------------------------------------
+git log commands
+-------------------------------------------------
+git log							// Shows the log of commits that have taken place so far
+git log -n 2					// Limits the number of displayed commit logs to the 2 most recent
+git log -2						// Does the same as the above command
+
+git log --oneline				// Shows commits in a one line summary with a partial SHA-1 hash
+git log --format=oneline		// Shows commits in a one line summary with the full SHA-1 hash
+git log --format=short			// Short format
+git log --format=medium			// Medium format
+git log --format=full			// Full format
+git log --format=fuller			// Fuller format
+git log --format=email			// Generates a format useful for mailing an email
+git log --format=raw			// Shows the raw information that is stored in Git
+
+git log --author="Kev"			// Shows all commits by authors whose names contain the text "Kev"
+git log --grep="Init"			// Shows all commits containing the regular expression "Init"
+git log --since=2018-05-28		// Shows all logs since the end of the 28th May 2018
+git log --until=2018-05-29		// Shows all logs up until the 29th May 2018
+git log --before=2018-05-29		// Shows all logs before the 29th May 2018
+
+git log --since="2 weeks ago" --until="3 days ago"	// Show all logs from 2 weeks ago up until 3 days ago
+													// Can also search using 'months'
+
+git log --since=2.weeks --until=3.days				// Does the same as the above command
+
+git log e22462e..87ac22b --online	// Show all commit logs after SHA-1 value e22462e, up to and 
+									// including SHA-1 value 87ac22b, in one line format
+									
+git log e22462e.. index.html	// Show the logs after the SHA-1 value e22462e, that affect index.html
+
+git log -p						// Shows git diff changes for each commit
+
+git log --stat --summary		// --stat and --summary may be used separately
+								// Tells you statistics about what changed in each commit
+								
+git log --graph			// Shows a graph of commits including branches, including branches merged back in
+
+git log --oneline --graph --all --decorate		// USEFUL COMPACT git log COMMAND
+
+-------------------------------------------------
+-------------------------------------------------
+
+
+git diff				// Shows the file changes between the files in the working directory and  						// the repository.
+
+git diff --staged		// Shows the file changes between the files in the staging directory and
+						// the repository. Prior to Git version 1.7, 'git diff -cached' was used
+						
+git rm file_to_delete2.txt		// Immediately deletes the file: file_to_delete2.txt (Does not 								// place in the Trash)
+
+git mv second_file.txt secondary_file.txt	// A mv (move) in Git is the same as a rename
+											// Renamed files are only recognised in the staging
+											// directory
+						
+[-] + [Shift] + [s]		// Wraps/unwraps text in terminal	
+
+git diff --color-words contact.html		// Shows only the changes to text in the element, instead
+										// of showing all text in the element before and after
+
+git commit -am "Commit Message"		// Add to the staging index and commit it to the repository, 
+									// in one action. Note: Files that are not tracked or are being
+									// deleted are not included in this. -am commits all and 
+									// and includes a message 
+
+git checkout -- index.html			// Restores index.html from the repository to the current
+									// working directory
+									// -- indicates that we are not checking out a branch, we
+									// are checking out a file from the current branch
+
+git reset HEAD resources.html		// Removes resources.html from the staging area by 
+									// resettings the HEAD back to the last commit
+									
+git checkout <SHA1 value> resources.html		// Gets resources.html from the commit
+E.g.											// represented by the SHA1 value and
+git checkout 84304f96d9aa7ad -- resources.html	// places it in the staging directory
+
+git revert <SHA1 value>			// Removes all changes made by the commit, represented by
+								// the SHA1 value
+								
+cat .git/HEAD					// Shows where the HEAD is pointing
+
+cat .git/refs/heads/master 		// Provides the commit SHA1 value of where the HEAD is pointing
+
+git reset --soft <SHA1 value>	// Moves the HEAD pointer to the commit represented by <SHA1 value>
+
+git reset --mixed <SHA1 value>	// Moves the HEAD pointer to the commit represented by <SHA1 value>
+								// Changes to the working directory will match the commit
+								// represented by the <SHA1 value>
+
+git reset --hard <SHA1 value>	// Moves the HEAD pointer to the commit represented by <SHA1 value>
+								// Changes the working directory and staging index to match the 								// repository
+
+git clean -n			// Performs a test run for deleting all new/changed files from the working 						// directory, but leaves all files in the staging.
+						// The -n flag is for a test run.
+						
+git clean -f 			// Deletes all new/changed files from the working directory, but 
+						// leaves all files in the staging.
+						
+nano .gitignore		// Creates/edits a file named ".gitignore" and opens nano for editing the file
+					// Add a list of files or regular expressions to the .gitignore file, to tell
+					// git which files to ignore
+					// e.g. by adding "tempfile.txt", Git would ignore changes made to it
+					//		by adding "*.txt", Git would ignore all temp files
+					//		by adding "# Comment *.txt" Git won't ignore all .txt files as this is
+					//		a comment
+					// Examples of .gitignore file contents:
+					// # Comment		// A comment
+					// .DS_Store		// Ignores the MacOS .DS_Store system file
+					// *.zip			// Ignores all files ending in .zip
+					// *.gz				// Ignores all files ending in .gz 
+					// log/*.log		// Ignores all files ending in .log in the log directory
+					// log/*.log.[0-9]	// Ignores all files ending in  .log.0, .log.1, .log.2...
+										// up to .log.9
+					// assets/photoshop/	// Ignores all files in the photoshop directory
+					// asets/videos/		// Ignores all files in the videos directory
+					// !assets/videos/tour_*.mp4	// Does NOT ignore files in the videos directory
+													// starting with "tour" and ending with .mp4
+					// Typical Files to ignore include:
+					// 1. Compiled source code
+					// 2. Packages and compressed files
+					// 3. Logs and databases
+					// 4. Operating system generated files
+					// 5. User-uploaded assets (images, PDF's, videos)
+					//
+					// .gitignore resources:
+					// https://github.com/github/gitignore
+					// https://help.github.com/articles/ignoring-files/
+
+git config --global core.excludesfile ~/.gitignore_global	// Ignores files in all repositories for the
+															// current user, where "~/.gitignore_global"
+															// can be any filename
+															
+git rm --cached tempfile2.txt	// Leaves tempfile2.txt in the working directory
+								// Stops tempfile2.txt from being added to the staging directory/commited
+								// Useful when trying to keep maintain a snapshot of files that should
+								// not be changed in the future
+
+// Git does not track empty folders. Overcome this by adding an empty file called .gitkeep to the empty // folder, so Git will keep track of it.
+
+
+-------------------------------------------------
+Tree-ish (i.e. a reference to a commit) Examples
+-------------------------------------------------
+HEAD^, acf94837^, master^			// Refers to the parent of the commit, referenced by HEAD, acf94837,
+HEAD~1, HEAD						// master, etc.
+
+HEAD^^, acf94837^^, master^^		// Refers to the grandparent (parent of the parent) of the commit
+HEAD~2	
+
+HEAD^^^, acf94837^^^, master^^^		// Refers to the pgreat-grandparent of the commit
+HEAD~3	
+
+-------------------------------------------------
+Tree-ish Commands
+-------------------------------------------------
+git ls-tree HEAD			// List the files & their SHA-1 values, in the commit referenced by the HEAD
+git ls-tree master			// List the files & their SHA-1 values, in the commit referenced by master
+git ls-tree master assets/  // List the files & their SHA-1 values, in the master commit, assets folder 
+git ls-tree <SHA-1 value>	// List the files & their SHA-1 values, in the commit or commit sub-folder, 							// referenced by the <SHA-1> value
+
+
+
+
+
+
+
+-------------------------
+Git & GitHub Crash Course For Beginners - https://www.youtube.com/watch?v=SWYqp7iY_Tc
+----------------------------------------
+
+git push		// Push to remote repository
+
+git pull		// Pull latest from remote repository
+
+git clone		// Clone repository into a new directory
+
+
+git branch newBranch1	// Creates a new branch called loginFunction	
+
+git checkout newBranch1	// Changes the current branch to the loginFunction branch
+
+git merge newBranch1	// To perform this you must go back to the main branch
+						// Merges the newBranch1 to the main branch
+						
+git remote				// Lists the remote repositories
+						
+git remote add origin https://github.com/janglsz/json-finder.git	// Adds the github repository
+																	// as a remote repository
+																	
+git push -u origin master	// Pushes the current repository to the remote Git repository
+git push				// Can be used to make subsequent pushes to the remote GitHub repository
+git pull	// Can be used to pull the remote GitHub repository to the local Git repository,
+			// in the event that a developer has updated the remote repository
+
+git clone https://github.com/janglsz/json-finder.git	// Creates a clone of the remote GitHub
+														// repository and saves it to the 
+														// current working directory
+														
+
+--------------------------
+UNIX COMMANDS
+--------------------------
+cd ~					// Changes the current working directory to the users root folder
+
+touch someFile.html	// Creates a new file called someFile.html in the current working directory
+
+nano .gitignore		// Creates/edits a file named ".gitignore" and opens nano for editing the file
+
+
+
+
