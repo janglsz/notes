@@ -1,11 +1,11 @@
 // GIT COMMANDS
 -----------------------------------------------------------------------------------------------------------------------------
 
-git --version		// Tells you the version of Git
+git --version												// Tells you the version of Git
 
-git config --global user.name "Kevin Jang"				// Add your name to the configuration file
-git config --global user.email "kevin.a.jang@gmail.com"		// Add your email address to the 															// configuration file	
-git config --list								// View the full Git configuration file
+git config --global user.name "Kevin Jang"					// Add your name to the configuration file
+git config --global user.email "kevin.a.jang@gmail.com"		// Add your email address to the 																							// configuration file	
+git config --list											// View the full Git configuration file
 
 cd ~								// Go to the users root folder 
 cat .gitconfig						// View the Git configuration file settings
@@ -122,14 +122,13 @@ git diff -w 22462e..HEAD						// Same as the above command
 -------------------------------------------------
 										
 						
-git rm file_to_delete2.txt		// Immediately deletes the file: file_to_delete2.txt (Does not 								// place in the Trash)
+git rm file_to_delete2.txt					// Immediately deletes the file: file_to_delete2.txt (Does not 																// place in the Trash)
 
 git mv second_file.txt secondary_file.txt	// A mv (move) in Git is the same as a rename
 											// Renamed files are only recognised in the staging
 											// directory
 						
-[-] + [Shift] + [s]		// Wraps/unwraps text in terminal	
-
+[-] + [Shift] + [s]					// Wraps/unwraps text in terminal	
 
 
 git commit -am "Commit Message"		// Add to the staging index and commit it to the repository, 
@@ -163,9 +162,10 @@ git reset --mixed <SHA1 value>	// Moves the HEAD pointer to the commit represent
 								// represented by the <SHA1 value>
 
 git reset --hard <SHA1 value>	// Moves the HEAD pointer to the commit represented by <SHA1 value>
-								// Changes the working directory and staging index to match the 								// repository
+								// Changes the working directory and staging index to match the 							// repository
 
-git clean -n			// Performs a test run for deleting all new/changed files from the working 						// directory, but leaves all files in the staging.
+git clean -n			// Performs a test run for deleting all new/changed files from the working 						
+						// directory, but leaves all files in the staging.
 						// The -n flag is for a test run.
 						
 git clean -f 			// Deletes all new/changed files from the working directory, but 
@@ -284,7 +284,4 @@ cd ~					// Changes the current working directory to the users root folder
 touch someFile.html	// Creates a new file called someFile.html in the current working directory
 
 nano .gitignore		// Creates/edits a file named ".gitignore" and opens nano for editing the file
-
-
-
 
