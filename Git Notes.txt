@@ -276,12 +276,134 @@ git clone https://github.com/janglsz/json-finder.git	// Creates a clone of the r
 														// current working directory
 														
 
+---------------------------------------
+VIEW & CREATING BRANCHES
+---------------------------------------
+
+git branch 						// Tell the default branch that you're currently on
+	
+ls -la .git/refs/heads			// Shows a listing of all the branches
+
+cat .git/refs/heads/master		// Shows the SHA1 of a commit that points to the tip of the current branch
+
+git branch <branch_name>		// Creates a new branch
+
+git checkout <branch_name>		// Switches to the branch named <branch_name>
+
+git checkout -b <branch_name>	// Creates the branch named <branch_name>
+								// -b switch tells git to switch to the created branch
+
+git diff master..<branch_name>	// Shows the diff between tip of branch master and tip of branch <branch_name>
+
+git diff --color-words master..<branch_name>	// Shows the diff on one line
+
+git branch --merged				// Lists all the branches that contain all the same commits as the current branch
+
+git branch -m <branch_name> <new_branch_name>	// -m indicates a banch rename (or move like with unix commands)
+
+git branch -d <branch_to_delete>			// Deletes the branch <branch_to_delete>
+git branch --delete <branch_to_delete>		// Same as the above commmand
+
+git branch -D <branch_to_delete>	//	Deletes the branch <branch_to_delete>
+									// -D forces deletion of the branch even if it contain commits that are not
+									// on the current branch (e.g. if you were on master)
+
+----------------------------------------
+GIT MERGE
+----------------------------------------
+
+git merge <branch_name>					// Merges the git diff in the branch <branch_name> to the current branch
+
+git merge --no-ff <branch_name> 		// Foces git to create a merge oommit, i.e. document the change
+
+git merge --ff-only <branch_name>		// Do a merge only if you can do a fast forward
+
+git merge --abort						// Aborts a merge if there are conflicts between branches
+
+git mergetool 							// Lists the types of merge tool commands that are available
+
 --------------------------
 UNIX COMMANDS
 --------------------------
-cd ~					// Changes the current working directory to the users root folder
+cd ~						// Changes the current working directory to the users root folder
 
-touch someFile.html	// Creates a new file called someFile.html in the current working directory
+touch someFile.html			// Creates a new file called someFile.html in the current working directory
 
-nano .gitignore		// Creates/edits a file named ".gitignore" and opens nano for editing the file
+nano .gitignore				// Creates/edits a file named ".gitignore" and opens nano for editing the file
+
+export PS1='\W$(__git_ps1 "(%s)") > '	// Changes the git bash command prompt to show the current branch, if you
+										// are in a git repository
+										// \W shows the currrent working directory
+										// __git_ps1 is a function that returns the current branch
+										// (%s) is the format string of the returned branch
+										// (%s) plus the '>' symbol is saved to the PS1 variable
+										// The PS1 value is the String representing the command prompt text
+										// Changes only exist for the current command prompt
+										// Save the command in the .bash_profile or .bash_rc file to keep the changes
+
+
+-----------------------------------------------------------
+THE STASH
+-----------------------------------------------------------
+
+git stash save "<stash message>"		// Stashes changes that have not been commited yet
+
+git stash list 							// Lists items in the stash
+
+git stash show stash@{0}				// Shows the stash diff for the stash stash@{0}
+
+git stash show -p stash@{0}				// Shows the stash diff for lines of text
+										// -p tells git to show the patch, i.e. a section of code 
+
+git stash apply							// Pulls the stash out and places it in the working directory, but leaves a copy
+										// in the stash. Pulls the first stash, i.e. stash@{0} by default if a stash index 
+										// is not specified
+
+git stash pop 							// Pulls the stash out, places it in the working directory, and removes it
+										// from the stash
+
+git stash drop stash@{index_value}		// Deletes the stash at the specified index
+										// After the deletion, the remaining stashes move up the stash stack
+
+git stash clear							// Deletes everything from the stash
+
+-----------------------------------------------------------
+.bashrc file for SSH setup and Command prompt text change
+-----------------------------------------------------------
+env=~/.ssh/agent.env
+
+agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent >| "$env")
+    . "$env" >| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+
+if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+    ssh-add
+fi
+
+unset env
+
+
+#Changes the command prompt to show to file path and branch if in a git repository
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+    export PS1='\W$(__git_ps1 "(%s)") > '
+fi
+
+-----------------------------------------
+.bash_profile
+-----------------------------------------
+export PS1='\W$(__git_ps1 "(%s)") > '		// Add to the .bash_profile file
+source ~/.bash_profile						// Changes the command prompt by running the command in the above .bash_profile file
+
+-----------------------------------------
 
