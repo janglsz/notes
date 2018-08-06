@@ -322,24 +322,7 @@ git merge --abort						// Aborts a merge if there are conflicts between branches
 
 git mergetool 							// Lists the types of merge tool commands that are available
 
---------------------------
-UNIX COMMANDS
---------------------------
-cd ~						// Changes the current working directory to the users root folder
 
-touch someFile.html			// Creates a new file called someFile.html in the current working directory
-
-nano .gitignore				// Creates/edits a file named ".gitignore" and opens nano for editing the file
-
-export PS1='\W$(__git_ps1 "(%s)") > '	// Changes the git bash command prompt to show the current branch, if you
-										// are in a git repository
-										// \W shows the currrent working directory
-										// __git_ps1 is a function that returns the current branch
-										// (%s) is the format string of the returned branch
-										// (%s) plus the '>' symbol is saved to the PS1 variable
-										// The PS1 value is the String representing the command prompt text
-										// Changes only exist for the current command prompt
-										// Save the command in the .bash_profile or .bash_rc file to keep the changes
 
 
 -----------------------------------------------------------
@@ -366,6 +349,43 @@ git stash drop stash@{index_value}		// Deletes the stash at the specified index
 										// After the deletion, the remaining stashes move up the stash stack
 
 git stash clear							// Deletes everything from the stash
+
+
+
+-----------------------------------------------------------
+USING LOCAL & REMOTE RESPOSITORIES
+-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------
+UNIX COMMANDS
+-----------------------------------------------------------
+cd ~						// Changes the current working directory to the users root folder
+
+touch someFile.html			// Creates a new file called someFile.html in the current working directory
+
+nano .gitignore				// Creates/edits a file named ".gitignore" and opens nano for editing the file
+
+export PS1='\W$(__git_ps1 "(%s)") > '	// Changes the git bash command prompt to show the current branch, if you
+										// are in a git repository
+										// \W shows the currrent working directory
+										// __git_ps1 is a function that returns the current branch
+										// (%s) is the format string of the returned branch
+										// (%s) plus the '>' symbol is saved to the PS1 variable
+										// The PS1 value is the String representing the command prompt text
+										// Changes only exist for the current command prompt
+										// Save the command in the .bash_profile or .bash_rc file to keep the changes
+
 
 -----------------------------------------------------------
 .bashrc file for SSH setup and Command prompt text change
