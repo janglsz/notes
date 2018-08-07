@@ -363,13 +363,28 @@ git remote 				// Lists your remote alias'
 
 git remote -v 			// List your remotes alias' and their URL's for both fetching and pushing
 
+git remote rm <remote_name>		// Deletes the remote
+
+git push -u origin master		// Pushes the repository to the remote repository
+								// -u creates the remote branch master, tracked from origin
+
+git clone <url>					// Pulls the current branch for the remote repository at the <url>
+
+git branch --set-upstream non_tracking origin/non_tracking		// Starts tracking the remote branch non_tracking
+
+git push origin master		// Pushes the current branch up to the remote indicated by "origin", onto the 
+							// "master" branch 
+git push 					// Same as the above command as long as origin is the default remote, and master is
+							// the remote branch
+
+git log --oneline origin/master -3		// Shows the git log (last 3 lines) of the remote branch named master
 
 
+git branch -r 				// Shows a list of remote branches
 
+							// fetch synchronises origin/master with whatever's on the remote repostory
 
-
-
-
+git fetch origin 			// Pulls/fetches the commits from the remote repository
 
 
 
