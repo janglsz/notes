@@ -356,6 +356,12 @@ git stash clear							// Deletes everything from the stash
 USING LOCAL & REMOTE RESPOSITORIES
 -----------------------------------------------------------
 
+git remote add <alias> <url>								// Adds a remote
+git remote add origin https://github.com/janglsz/notes		// E.g.
+
+git remote 				// Lists your remote alias'
+
+git remote -v 			// List your remotes alias' and their URL's for both fetching and pushing
 
 
 
