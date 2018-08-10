@@ -504,3 +504,32 @@ git fetch 												// Fetch any changes from the remote repository
 git merge origin/master									// Merge the changes from origin/master
 git merge feedback_form									// Merge the changes from the feedback_form branch
 git push 												// Push changes to the remote server
+
+
+-----------------------------------------
+USEFUL TOOLS & NEXT STEPS
+-----------------------------------------
+
+git config --global alias.st "status"	// Adds the alias "st" (to  ~/.gitconfig), which executes the command "status"
+cat ./.gitconfig						// Lists the contents of .gitconfig
+
+// GitWeb is a GUI tool for tracking git repositories
+
+
+-----------------------------------------
+GUI's FOR MAC
+-----------------------------------------
+GitX
+GitHub
+SourceTree
+Tower
+SmartGit
+Gitbox
+
+-----------------------------------------
+GUI's FOR WINDOWS
+-----------------------------------------
+TortoiseGit
+GitHub - https://windows.github.com
+Git Extentsions
+SmartGit
