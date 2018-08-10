@@ -386,6 +386,19 @@ git branch -r 				// Shows a list of remote branches
 
 git fetch origin 			// Pulls/fetches the commits from the remote repository
 
+git pull 					// git pull = git fetch + git merge
+
+git branch non_trcking origin/non_tracking		// Create a new branch called non_tracking to track the remote
+												// branch origin/non_tracking
+
+git checkout -b non_tracking origin/non_tracking	// Create a new branch called non_tracking to track the remote
+													// branch origin/non_tracking and switch to the new branch
+
+git branch -a 										// -a shows local and remote branches
+
+git push origin :<branch_name>						// Deletes the remote branch_name
+git push origin --delete <branch_name>				// Same as the above (more intuitive format)
+
 
 
 -----------------------------------------------------------
@@ -446,5 +459,48 @@ fi
 export PS1='\W$(__git_ps1 "(%s)") > '		// Add to the .bash_profile file
 source ~/.bash_profile						// Changes the command prompt by running the command in the above .bash_profile file
 
+
+
+-----------------------------------------
+TYPICAL COLLABORATION WORKFLOW
 -----------------------------------------
 
+COLLABORATOR 1:
+
+git checkout master								// Change to the branch named master
+git fetch 										// Fetch the current build from the remote repository
+git merge origin/master							// Merge the changes between the local and remote repository 
+git checkout -b feedback_form					// Create a new branch named feedback_form and switch to that branch
+git add feedback.html							// Add a changed file to the staging area
+git commit -m "Add customer feedback form"		// Commit the changes
+git fetch 										// Check if any changes have been made to the remote repository before pushing
+git push -u origin feedback_form				// Push the feedback_form branch up to the remote repository
+												// -u option advises git to track the remote branch
+
+
+COLLABORATOR 2:
+
+git checkout master 									// Change to the branch master
+git fetch 												// Fetch any changes from the remote repository
+git merge origin/master 								// Merge changes from the remote origin/master with the current branch (master)
+git checkout -b feedback_form origin/feedback_form		// Create a new branch named feedback_form from the remote
+														// repository origin/feedback_form
+														// -b indicates to switch to the new branch
+														// This is also a tracking branch
+git log 												// Check what changes have been made
+git show <SHA>											// Shows changes in reference to <SHA>
+git commit -am "Add tour selector to feedback form"		// Collaborator 2 commits changes
+git fetch 												// Precautionary fetch before pushing checks for any changes
+git push 												// Collaborator 2 pushes changes
+
+
+COLLABORATOR 1:
+
+git fetch 												// Fetch the remote branch 
+git log -p feedback_form..origin/feedback_form			// Shows a diff of changes between feedback_form and origin/feedback_form
+git merge origin/feedback_form							// Merge the changes
+git checkout master										// Change to the master branch
+git fetch 												// Fetch any changes from the remote repository
+git merge origin/master									// Merge the changes from origin/master
+git merge feedback_form									// Merge the changes from the feedback_form branch
+git push 												// Push changes to the remote server
