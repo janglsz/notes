@@ -1,0 +1,140 @@
+MAVEN INSTALLATION NOTES (Windows 7):
+-------------------------------------
+
+1. Download the Apache Maven binary zip file: http://maven.apache.org/download.cgi#
+2. Extract the zip file contents to C:\Program Files\
+3. Add the following User Environment Variables:
+
+	JAVA_HOME 	C:\Program Files\Java\jdk1.8.0_144
+	M2 	 		%M2_HOME$\bin
+	M2_HOME		C:\Program Files\Apache Software Foundation\apache-maven-3.5.4
+	Path		C:\Program Files\apache-maven-3.5.0\bin
+
+4. Add the following System environment variables:
+
+	JAVA_HOME 	C:\Program Files\Java\jdk1.8.0_144
+	MAVEN_HOME	C:\Program Files\apache-maven-3.5.4\apache-maven;		// May be optional
+	Path		C:\Program Files\apache-maven-3.5.0\bin
+
+
+USE MAVEN TO GENERATE A JAVA PROJECT
+------------------------------------
+SYNTAX: 
+mvn archetype:generate -DgroupId=groupid -DartifactId=project-name -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=booleanValue
+
+EXAMPLE:
+mvn archetype:generate -DgroupId=com.tutorialspointexamples -DartifactId= MavenHelloWorld -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+
+ADDING THE MAVEN JUNIT DEPENDENCY
+---------------------------------
+
+1. Google "Maven JUnit Dependency"
+2. Click the link to: https://mvnrepository.com/artifact/junit/junit
+3. Click the link to the latest version, e.g. 4.12
+4. Copy the dependency HTML code and past in the pom.xml file and save. The "Maven Dependencies" folder should now appear in the Eclipse pacakge explorer.
+
+
+MAVEN BUILD COMMANDS
+--------------------
+
+FROM THE COMMAND LINE:
+1. mvn clean			// Removes the target folder containing previous generated .class files
+2. mvn compile			// Compiles the App.java file and generates its .class file
+3. mvn test-compile 	// Compiles the AppTest.java file and generatest the .class file
+4. mvn test 			// Runs the test. Generates the <projectfolder>/target/surefire-reports/ folder
+5. mvn install 			// Creates a runnable .jar file for the project in the project folder
+
+FROM ECLIPSE:
+1. Right click the project > Run As... > Maven build...
+2. In the "Goals" field enter "clean" and click the [Run] button
+3. Repeat steps 2 and 3 for your chosen commands: "compile", "test-compile", "test" or "install"
+
+
+MAVEN BUILD LIFECYCLE
+---------------------
+
+When any of the below commands are run, they are preceeded by the commands above it:
+1. validate
+2. compile
+3. test
+4. pacakge 				// Package your code into a distributable format such as a .jar
+5. integration-test		// Compiles and deloys integration tests if they are present
+6. verify				// Run any checks to verify the package is valid and meets the quality criteria
+7. install
+8. deploy				// Done in an integraton or release environment. Copies the package to the remote environment, e.g. GitHub
+
+
+pom.xml FILE
+============
+
+VIEWING A TRANSITIVE DEPENDENCY (i.e. dependencies of a dependency):
+--------------------------------------------------------------------
+1. In Eclipse, open the pom.xml file
+2. Hover the mouse over the dependency
+3. Press the [CTRL] button and click the dependency hyperlink that appears
+
+EXCLUDING A MAVEN DEPENDENCY:
+-----------------------------
+1. In Eclipse, open the pom.xml file
+2. Hover the mouse over the dependency
+3. Press the [CTRL] button and click the dependency hyperlink that appears to open the transitive dependencies
+4. In the transitive dependency .pom file, locate the dependencies you wish to exlude
+5. Copy the <groupId></groupId> and <artifactId></artifactId> for the dependency
+6. In the original pom.xml file, before the closing </dependency> tag, create an <exclusions> tag, and create an <exclusion> tag for each transitive dependency you wish to exclude:
+   
+E.g. The below code removes the org.jboss.logging and javax.persistence dependencies
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.maven</groupId>
+  <artifactId>mavensampleproject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+  	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	    <scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-core</artifactId>
+	    <version>5.3.6.Final</version>
+		<exclusions>
+  			<exclusion>
+		  		<groupId>org.jboss.logging</groupId>
+		      	<artifactId>jboss-logging</artifactId>
+  			</exclusion>
+  			<exclusion>
+  				<groupId>javax.persistence</groupId>
+      			<artifactId>javax.persistence-api</artifactId>
+  			</exclusion>
+  		</exclusions>
+	</dependency>
+  </dependencies>
+
+</project>
+
+
+LIMITING SCOPE OF A DEPENDENCY
+------------------------------
+
+	<dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	    <scope>test</scope>						// Limits the scope of the dependency to only affect tests
+	</dependency>								
+
+In the above, you can replace <scope>test</scope> with the following:
+<scope>compile</scope> 				// Refers to the default scope.	
+<scope>runtime</scope>				// Dependency is only required for runtime (i.e. execution), not the compilation
+<scope>provided</scope>				// You expect the JDK or container to provide the dependency at runtime
+
+
+OTHER TOOLS
+-----------
+
+Cmder - Command line tool for Windows: http://cmder.net/
