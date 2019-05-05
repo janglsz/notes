@@ -1,5 +1,7 @@
+TEST
+
 // GIT COMMANDS
------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
 
 git --version												// Tells you the version of Git
 
@@ -254,9 +256,9 @@ git pull		// Pull latest from remote repository
 git clone		// Clone repository into a new directory
 
 
-git branch newBranch1	// Creates a new branch called loginFunction	
+git branch newBranch1	// Creates a new branch called newBranch1	
 
-git checkout newBranch1	// Changes the current branch to the loginFunction branch
+git checkout newBranch1	// Changes the current branch to the newBranch1 branch
 
 git merge newBranch1	// To perform this you must go back to the main branch
 						// Merges the newBranch1 to the main branch
