@@ -52,9 +52,9 @@ git commit -m "Initial Commit"		// Commit the changes to the repository with the
 -------------------------------------------------
 git log commands
 -------------------------------------------------
-git log							// Shows the log of commits that have taken place so far
+git log						// Shows the log of commits that have taken place so far
 git log -n 2					// Limits the number of displayed commit logs to the 2 most recent
-git log -2						// Does the same as the above command
+git log -2					// Does the same as the above command
 
 git log --oneline				// Shows commits in a one line summary with a partial SHA-1 hash
 git log --format=oneline		// Shows commits in a one line summary with the full SHA-1 hash
