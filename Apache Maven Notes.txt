@@ -23,7 +23,10 @@ SYNTAX:
 mvn archetype:generate -DgroupId=groupid -DartifactId=project-name -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=booleanValue
 
 EXAMPLE:
-mvn archetype:generate -DgroupId=com.tutorialspointexamples -DartifactId= MavenHelloWorld -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+mvn archetype:generate -DgroupId=com.tutorialspointexamples -DartifactId=MavenHelloWorld -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+EXAMPLE:
+mvn archetype:generate -DgroupId=com.company.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
 
 ADDING THE MAVEN JUNIT DEPENDENCY
